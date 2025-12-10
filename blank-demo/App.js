@@ -18,7 +18,7 @@ export default function App() {
     try{  
         setLoading(true);     
         
-        await new Promise(resolve => setTimeout(resolve, 2000)); //模拟网络延迟
+        //await new Promise(resolve => setTimeout(resolve, 2000)); //模拟网络延迟
         let res = await fetch(`http://192.168.0.39:3000/search?q=${key}`);
         //console.log("res from " ,res);
         let resJson = await res.json();
@@ -42,7 +42,7 @@ export default function App() {
 
   useEffect(() => {
     loadRecords(key);
-  }, [key]);
+  }, []);
 
   if(loading){
     return (<View style={styles.container_center}><Loading /></View>);
@@ -61,7 +61,7 @@ export default function App() {
     <View style={styles.container}>
       <TextInput placeholder='please input keyword to search'
       defaultValue={key}
-      style={styles.textInput} value ={key } onChangeText={setKey}></TextInput>
+      style={styles.textInput} value ={key } onChangeText={setKey} onBlur={()=>loadRecords(key)}></TextInput>
 
       <Text style={[{color: 'red'},styles.title ]}>Courses {courses.length} count </Text>
 
