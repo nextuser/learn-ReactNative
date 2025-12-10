@@ -17,10 +17,12 @@ export default function App() {
   const loadRecords = async (key) => {
     try{  
         setLoading(true);     
-        
+        console.log("loading records for key=", key);
+        let url = `http://192.168.0.39:3000/search?q=${key ? key : ''}`;
         //await new Promise(resolve => setTimeout(resolve, 2000)); //模拟网络延迟
-        let res = await fetch(`http://192.168.0.39:3000/search?q=${key}`);
-        //console.log("res from " ,res);
+        console.log("fetching url:", url);
+        let res = await fetch(url);
+        console.log("res from " ,res);
         let resJson = await res.json();
 
         //console.log("json result from " ,resJson);
@@ -28,7 +30,7 @@ export default function App() {
          
         setCourses(data.courses);
 
-        //console.log("courses " ,data.courses);
+        console.log("courses " ,data.courses);
         if(data.courses.length > 0)console.log("courses [0]" ,data.courses[0].id ,data.courses[0].name);
 
         setError(false);
