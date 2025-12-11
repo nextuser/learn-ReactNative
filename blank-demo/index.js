@@ -1,6 +1,6 @@
 import { registerRootComponent } from 'expo';
 
-import App from './App2';
+import App from './App22';
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in Expo Go or in a native build,
