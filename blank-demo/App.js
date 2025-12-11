@@ -37,7 +37,8 @@ export default function App() {
             console.log("resJson from " ,resJson);
             data =  resJson.data;
         } else{
-          let url = `http://192.168.0.39:3000/search?q=${key ? key : ''}`;
+          //
+          let url = `${process.env.EXPO_PUBLIC_API_URL}/search?q=${key ? key : ''}`;
           data = await loadData(url);
         }
         
