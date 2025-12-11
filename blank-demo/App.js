@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,Button,TextInput } from 'react-native';
+import { StyleSheet, Text, View,Button,TextInput,Image } from 'react-native';
 import { useState , useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
 import Loading from './components/shared/loading';
@@ -80,10 +80,17 @@ export default function App() {
       style={styles.textInput} value ={key } onChangeText={setKey} onBlur={()=>loadRecords(key)}></TextInput>
 
       <Text style={[{color: 'red'},styles.title ]}>Courses {courses.length} count </Text>
+      
 
       {
         courses.map((course) => {
-          return <Text key={course.id} style={styles.textRed}>{course.name}</Text>
+          debug('course.image',course.image);
+          debug('course.name',course.name);
+          //return <Image key={course.id} style={styles.image} source={{uri: course.image}}></Image> // <Text style={styles.textRed}>{course.name}</Text>
+          return <View key={course.id} style={styles.course}> 
+            <Text style={styles.textRed}>{course.name}</Text>
+             <Image style={styles.image} source={{uri: course.image}}></Image>
+          </View>
         })
       }
  
@@ -101,6 +108,13 @@ const styles = StyleSheet.create({
     justifyContent: 'top',
     paddingLeft:16,
     paddingTop:30
+  },
+  course: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'start',
+    justifyContent: 'top',
+    paddingTop:16
   },
 
     container_center: {
@@ -134,5 +148,9 @@ const styles = StyleSheet.create({
     color: 'red',
     alignContent:'center',
     justifyContent:'start',
+  },
+  image : {
+    width : 400,
+    height : 150,
   }
 });

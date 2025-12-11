@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {Switch,StyleSheet,Text,View,Button,Alert, TouchableOpacity,Pressable} from 'react-native';
 import { SafeAreaProvider,SafeAreaView } from "react-native-safe-area-context";
+import { Dimensions } from "react-native";
 
 export default function App(){
     const [isEnabled,setIsEnabled] = useState(false);
@@ -19,11 +20,13 @@ export default function App(){
       },
       { text: '确定', onPress: () => console.log('确认了') },
     ]);
-
+    const {width, height} = Dimensions.get('window');
     return (<SafeAreaProvider> 
     <SafeAreaView style={styles.container}> 
-        <Switch onValueChange={toggleSwitch} value={isEnabled} />
-        <Text>{isEnabled ? "开" : "关"}</Text>
+        <Text style={styles.text}>screen width {width}, screen height:{height}</Text>
+        <Switch style={styles.switch}  onValueChange={toggleSwitch} value={isEnabled} />
+
+        <Text style={styles.text}>{isEnabled ? "开" : "关"}</Text>
         <TouchableOpacity  style={styles.buttonContainer} onPress={onPressOne}>
             <Text>{'你点我撒？'}</Text>
         </TouchableOpacity>
@@ -40,12 +43,24 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor:'#fff',
         alignItems:'center',
+        alignContent:'center',
         justifyContent:'center',
     },
     buttonContainer:{
         backgroundColor:'#e29447',
+        alignItems:'center',
         padding:8,
         margin:20,
         borderRadius:5,
+    },
+    text:{
+        textAlign:'center',
+        alignContent:'center',
+        justifyContent:'center',
+    },
+    switch:{
+        alignContent:'center',
+        alignItems:'center',
+        justifyContent:'center',
     }
 });
