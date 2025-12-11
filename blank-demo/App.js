@@ -5,7 +5,8 @@ import { ActivityIndicator } from 'react-native';
 import Loading from './components/shared/loading';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import NetError from './components/shared/net-error';
-
+import  request,{get} from './utils/request';
+import debug from './utils/debug';
 
 export default function App() {
 //hook 需要再函数中调用
@@ -14,24 +15,36 @@ export default function App() {
   const [key,setKey] = useState("");
   const [loading ,setLoading] = useState (false) ;
   const [error ,setError] = useState (false) ;
-  const loadRecords = async (key) => {
-    try{  
-        setLoading(true);     
-        console.log("loading records for key=", key);
-        let url = `http://192.168.0.39:3000/search?q=${key ? key : ''}`;
-        //await new Promise(resolve => setTimeout(resolve, 2000)); //模拟网络延迟
-        console.log("fetching url:", url);
+
+  const UseNew = true;
+
+  async function loadData(url){
         let res = await fetch(url);
-        console.log("res from " ,res);
+        //console.log("res from " ,res);
         let resJson = await res.json();
 
         //console.log("json result from " ,resJson);
         let {data} = resJson;
-         
+        return data; 
+  }
+  const loadRecords = async (key) => {
+    try{  
+        setLoading(true);     
+        console.log("loading records for key=", key);
+        let data = {};
+        if(UseNew){
+            let resJson = await get('/search',{q: key ? key : ''});
+            console.log("resJson from " ,resJson);
+            data =  resJson.data;
+        } else{
+          let url = `http://192.168.0.39:3000/search?q=${key ? key : ''}`;
+          data = await loadData(url);
+        }
+        
         setCourses(data.courses);
-
-        console.log("courses " ,data.courses);
-        if(data.courses.length > 0)console.log("courses [0]" ,data.courses[0].id ,data.courses[0].name);
+        if(data.courses.length > 0){
+          debug("courses [0]" ,data.courses[0].id ,data.courses[0].name);
+        }
 
         setError(false);
     } catch (err) {
