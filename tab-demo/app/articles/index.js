@@ -19,7 +19,7 @@ export default function Details(){
                 this is detail2 information
             </Text>
 
-            <TouchableOpacity  style={styles.linkButton} onPress={()=>router.push("/article")}>
+            <TouchableOpacity  style={styles.linkButton} onPress={()=>router.push("/articles")}>
                 <Text style={styles.text}>push article</Text>
             </TouchableOpacity>
             <TouchableOpacity  style={styles.linkButton} onPress={()=>router.replace("/details")}>
