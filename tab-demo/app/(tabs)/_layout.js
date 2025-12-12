@@ -2,7 +2,6 @@ import { Tabs, Link } from 'expo-router';
 import { Image } from 'expo-image';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import Layout from '../../../router-demo/app/_layout';
 
 /**
  * 导航栏 Logo 组件
@@ -27,6 +26,12 @@ function HeaderButton(props) {
   );
 }
 
+function TabBarIcon(props) { 
+    const {name , ...rest} = props;
+    return <SimpleLineIcons size={20} name={name} {...rest} />
+}
+
+
 export default function TabLayout() {
   return (<Tabs
       screenOptions={{
@@ -39,19 +44,29 @@ export default function TabLayout() {
             <HeaderButton name="options" href="/settings" style={styles.headerRight} />
           </>
         ),
+        tabBarAccessibilityLabel:'#1f99b0',
       }}
     >
       <Tabs.Screen
         name="index"
-        options={{ title: '发现' }}
+        options={{
+          title: '发现',
+          tabBarIcon: ({ color }) => <TabBarIcon name="compass" color={color} />,
+        }}
       />
       <Tabs.Screen
         name="videos"
-        options={{ title: '视频课程' }}
+        options={{ 
+            title: '视频课程' ,
+            tabBarIcon:({color}) => <TabBarIcon name="control-play" color={color} />,  
+        }}
       />
       <Tabs.Screen
         name="users"
-        options={{ title: '我的' }}
+        options={{ 
+            title: '我的' ,
+            tabBarIcon:({color}) => <TabBarIcon name="user" color={color} />,  
+        }}
       />
     </Tabs>
   );

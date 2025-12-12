@@ -9,6 +9,10 @@ export default function Index() {
       <Link style={styles.link} href="/courses/1?title=Node.js">
         查看 Node.js 课程
       </Link>
+      
+      <Link style={styles.link} href="/teachers/1?name=chales" asChild>
+        <Text>charles</Text>
+      </Link>
     </View>
   );
 }
