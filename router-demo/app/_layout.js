@@ -7,7 +7,7 @@ import  {Ionicons,MaterialIcons,FontAwesome5,AntDesign,Foundation,SimpleLineIcon
 function LogoTitle(props){
   return (
     <Foundation.Button name="home" size={36} color="white" >
-    <Text style={{color:'white',fontSize:24}}>title for {props && props.title? props.title : ''}</Text>
+      <Text style={{color:'white',fontSize:24}}>title for {props && props.title? props.title : ''}</Text>
     </Foundation.Button>
   );
 }
@@ -22,8 +22,7 @@ function HomeTitle(props){
 }
 
 export default function Layout() {
-  return (
-    <Stack screenOptions={{
+  return (<Stack screenOptions={{
       headerBackButtonDisplayMode: 'minimal',
       headerStyle: {
         backgroundColor: '#f4511e',
@@ -36,7 +35,6 @@ export default function Layout() {
       },
       animation: 'slide_from_right',
     }}
-    
     >
       <Stack.Screen name="index" options={{
         headerTitle: (props) => <HomeTitle  {...props} />,
@@ -52,8 +50,7 @@ export default function Layout() {
       <Stack.Screen name="details2" options={{
         headerTitle: (props) => <LogoTitle  {...props}/>,
       }} />
-      <Stack.Screen name="courses/[id]" options={
-        
+      <Stack.Screen name="courses/[id]" options={        
         ({route}) => ({
         headerTitle: (props) => <LogoTitle {...props} title={route&& route.params && route.params.title || 'Course'} />,  
       })} /> 
