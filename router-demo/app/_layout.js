@@ -14,9 +14,9 @@ function LogoTitle(props){
 
 function HomeTitle(props){
   return (
-   <Foundation.Button name="home" size={36} color="white" >
+  <Foundation.Button name="home" size={36} color="white" >
     <Text style={{color:'white',fontSize:24}}>{props.title}</Text>
-    </Foundation.Button>
+  </Foundation.Button>
   );
 
 }

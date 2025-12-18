@@ -8,8 +8,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
-  "dependencies": {
-  },
-
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "expo": "^54.0.29"
+  }
 }
